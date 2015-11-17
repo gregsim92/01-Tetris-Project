@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>Play On!</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+</head>
+<body>
+	<div class ='container' id = 'mainContainer'>
+		<div class='col-md-8 vcenter'>
+			<div class='col-md-6 col-md-offset-3'>
+				<canvas  id='gameBoard' height = '500' width ='250'></canvas>
+				<script>
+					var canvas = document.getElementById('gameBoard');
+					var ctx = canvas.getContext('2d');
+
+				</script>
+			</div>
+		</div>
+		
+		<div class='col-md-4 vcenter'>
+			<div class ='centered'>
+				<div class='displayNextPiece'>
+					<img src="http://lorempixel.com/200/100" alt="next Piece placeholder" class='image-responsive center-block'>
+				</div>
+				<div>0</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
