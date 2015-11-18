@@ -65,10 +65,17 @@ Tetromino.prototype.addBlock = function() {
 	
 };
 
+Tetromino.prototype.tetrominoFall = function() {
+	
+	for (var j = 0; j < this.blocks.length; j++){
+		this.blocks[j].moveDown();
+	}
+};
 
 
 
-var Block = function (x,y,color){
+
+var Block = function (x, y, color){
 	this.x = x;
 	this.y = y;
 	this.color = color;
@@ -91,7 +98,6 @@ Block.prototype.moveLeft = function() {
 
 Block.prototype.moveRight = function() {
 	this.x += 25;
-	console.log('move right');
 };
 
 Block.prototype.moveDown = function() {

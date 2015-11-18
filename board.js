@@ -1,10 +1,19 @@
-var Board = function (entities) {
+var Board = function (tetromino) {
 	this.canvas = document.getElementById('gameBoard');
-	console.log(this.canvas)
 	this.canvas.width = 250;
 	this.canvas.height = 500;
+	this.ctx = this.canvas.getContext('2d');
 
 }
+Board.prototype.addNewTetromino = function() {
+			this.first = new Tetromino(types[0]);
+			this.first.draw(this.ctx);
+};
+Board.prototype.lowerFirst = function() {
+	this.first.tetrominoFall();
+	this.first.draw(this.ctx);
+};
+
 
 // Board.prototype.render = function() {
 // 	// body...
