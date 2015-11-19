@@ -15,11 +15,18 @@ Board.prototype.lowerFirst = function() {
 	this.first.draw(this.ctx);
 };
 
-Board.prototype.updateBoard = function() {
-  window.setInterval(this.lowerFirst.bind(this), 900);
-	
-};
+// Board.prototype.moveFirst = function() {
+// 	if ()
+// };
 
+
+
+
+
+
+Board.prototype.updateBoard = function() {
+	window.setInterval(this.lowerFirst.bind(this), 900);
+};
 
 // Board.prototype.render = function() {
 // 	// body...
