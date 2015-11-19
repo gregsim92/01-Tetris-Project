@@ -73,17 +73,61 @@ Tetromino.prototype.dropPiece = function() {
 };
 
 Tetromino.prototype.movePieceLeft = function() {
+	
 	for (var j = 0; j < this.blocks.length; j++){
 		this.blocks[j].moveLeft();
 	}
+	return
 };
 
 Tetromino.prototype.movePieceRight = function() {
+	
+	if (this.x >=250){
+		console.log('bondary right');
+	} else {
 	for (var j = 0; j < this.blocks.length; j++){
 		this.blocks[j].moveRight();
+		}
 	}
 };
 
+Tetromino.prototype.boundaryLeft = function() {
+	var outLeft = false;
+	if (this.x < 0){
+		console.log('Out of Bounds Left!');
+		return true;
+	}
+};
+
+Tetromino.prototype.boundaryRight = function() {
+	var outRight = false;
+	if (this.x > 250){
+		console.log('Out of Bounds Right!');
+		return true;
+	}
+};
+
+Tetromino.prototype.boundaryFloor = function() {
+	var outBottom = false;
+	if (this.y > 500){
+		console.log('Fell through the floor!');
+		return true;
+	} else {
+		console.log('play area');
+	}
+};
+
+Tetromino.prototype.Boundaries = function() {
+	this.first.boundaryFloor();
+	this.first.boundaryLeft();
+	this.first.boundaryRight();
+};
+
+Tetromino.prototype.checkBoundary = function() {
+
+	console.log(this);
+	window.setInterval(this.Boundaries, 900);
+};
 
 
 var Block = function (x, y, color){
@@ -115,32 +159,3 @@ Block.prototype.moveDown = function() {
 	this.y +=25;
 };
 
-Block.prototype.boundaryLeft = function() {
-	if (this.x < 0){
-		console.log('Out of Bounds Left!');
-	}
-};
-
-Block.prototype.boundaryRight = function() {
-	if (this.x > 250){
-		console.log('Out of Bounds Right!');
-	}
-};
-
-Block.prototype.boundaryFloor = function() {
-	if (this.y > 500){
-		console.log('Fell through the floor!');
-	} else {
-		console.log('play area');
-	}
-};
-
-Block.prototype.Boundaries = function() {
-	this.first.boundaryFloor();
-	this.first.boundaryLeft();
-	this.first.boundaryRight();
-};
-
-Block.prototype.checkBoundary = function() {
-	window.setInterval(this.Boundaries.bind(this), 900)
-};

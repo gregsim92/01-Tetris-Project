@@ -15,13 +15,18 @@ Board.prototype.lowerFirst = function() {
 	this.first.draw(this.ctx);
 };
 
-// Board.prototype.moveFirst = function() {
-// 	if ()
-// };
+Board.prototype.moveFirstLeft = function() {
+	this.first.movePieceLeft();
+	this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+	this.first.draw(this.ctx);
+};
 
+Board.prototype.moveFirstRight = function() {
 
-
-
+	this.first.movePieceRight();
+	this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+	this.first.draw(this.ctx);	
+};
 
 
 Board.prototype.updateBoard = function() {

@@ -16,25 +16,26 @@
 // 					// first.draw(ctx);
 
 // 					//moving a square
-// 					$('body').on('keydown', function(e){
+					$('body').on('keydown', function(e){
 
-// 						switch(e.which){
-// 						case 37: //left
-// 							console.log("left");
-// 							first.moveLeft();
-// 							break;
-// 						case 39: //right
-// 							console.log("right");
-// 							first.moveRight();
-// 							break;
-// 						case 40: //down
-// 							console.log("down");
-// 							break;
-// 						case 38: //fall down
-// 							console.log('bottom');
-// 							//set floor first!!!
-// 						default: return;
-// 						}
-// 						e.preventDefault();
+						switch(e.which){
+						case 37: //left
+							console.log("left");
+							gameBoard.moveFirstLeft();
+							break;
+						case 39: //right
+							console.log("right");
+							gameBoard.moveFirstRight();
+							break;
+						case 40: //down
+							console.log("down");
+							gameBoard.lowerFirst();
+							break;
+						case 38: //fall down
+							console.log('bottom');
+							//set floor first!!!
+						default: return;
+						}
+						e.preventDefault();
 
-// 					});
+					});
