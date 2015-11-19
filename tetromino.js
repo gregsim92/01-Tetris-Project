@@ -65,7 +65,7 @@ Tetromino.prototype.addBlock = function() {
 	
 };
 
-Tetromino.prototype.tetrominoFall = function() {
+Tetromino.prototype.dropPiece = function() {
 	
 	for (var j = 0; j < this.blocks.length; j++){
 		this.blocks[j].moveDown();
