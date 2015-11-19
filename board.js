@@ -1,3 +1,5 @@
+$(document).ready()
+	var pause = true;
 var Board = function (tetromino) {
 	this.canvas = document.getElementById('gameBoard');
 	this.canvas.width = 250;
@@ -30,18 +32,24 @@ Board.prototype.moveFirstRight = function() {
 
 
 Board.prototype.updateBoard = function() {
+
 	window.setInterval(this.lowerFirst.bind(this), 900);
 };
 
-// Board.prototype.render = function() {
-// 	// body...
-// 	ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
+Board.prototype.resetBoard = function() {	
 	
-// 	for (var e = 0; n < entities.length; e++){
-// 			this.entities[n].
-// 	}
+	//still needs to reset piece position
 	
-	//loop through, call the draw function of every entity
+	this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+	console.log('board reset');
+};
 
-// };
+Board.prototype.startNewGame = function() {
+
+	this.resetBoard();
+	this.updateBoard();
+};
+
+
+
 

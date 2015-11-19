@@ -20,20 +20,25 @@
 
 						switch(e.which){
 						case 37: //left
-							console.log("left");
 							gameBoard.moveFirstLeft();
 							break;
 						case 39: //right
-							console.log("right");
 							gameBoard.moveFirstRight();
 							break;
 						case 40: //down
-							console.log("down");
 							gameBoard.lowerFirst();
 							break;
 						case 38: //fall down
 							console.log('bottom');
 							//set floor first!!!
+							break;
+						case 32:
+							console.log('rotate piece');
+							break;	
+						case 13:
+							console.log('play/pause');
+							gameBoard.startNewGame();
+							
 						default: return;
 						}
 						e.preventDefault();
