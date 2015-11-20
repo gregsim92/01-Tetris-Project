@@ -72,23 +72,11 @@ Tetromino.prototype.dropPiece = function() {
 	}
 };
 
-Tetromino.prototype.movePieceLeft = function() {
-	
-	for (var j = 0; j < this.blocks.length; j++){
-		this.blocks[j].moveLeft();
-	}
-	return
-};
-
 Tetromino.prototype.movePieceRight = function() {
-	
-	if (this.x >=250){
-		console.log('bondary right');
-	} else {
+
 	for (var j = 0; j < this.blocks.length; j++){
 		this.blocks[j].moveRight();
 		}
-	}
 };
 
 Tetromino.prototype.boundaryLeft = function() {
@@ -130,6 +118,50 @@ Tetromino.prototype.checkBoundary = function() {
 };
 
 
+
+
+
+
+
+Tetromino.prototype.move = function(direction, board) {
+	console.log('move');
+
+	if (direction == 'left'){
+		
+		for (var j = 0; j < this.blocks.length; j++){
+			var didMoveLeft = this.blocks[j].move('left', board);
+
+			// if (!didMoveLeft) {
+			// 	for (var i = j; i>0; i--){
+			// 		this.blocks[j].move('right',board);
+			// 	}
+			// }
+		}
+	} else if  (direction == 'right'){
+			
+		for (var j = 0; j < this.blocks.length; j++){
+			var didMoveRight = this.blocks[j].move('right', board);
+			// if (!this.blocks[j].move('right', board)){
+			// 	for (var i = j; i>0; i--){
+			// 		this.blocks[i].move('left',board);
+			// 	}
+			// }
+		}
+	} else if (direction =='down'){
+	
+		for (var j = 0; j < this.blocks.length; j++){
+			var didMoveDown = this.blocks[j].move('down', board);
+
+			// if (!this.blocks[j].move('down', board)){
+			// 	for (var i = j; i>0; i--){
+			// 		this.blocks[i].move('up',board);
+			// 	}
+			// }
+		}
+	}
+					console.log('break');
+};
+
 var Block = function (x, y, color){
 	this.x = x;
 	this.y = y;
@@ -147,15 +179,44 @@ Block.prototype.draw = function(context) {
       context.stroke();
 };
 
-Block.prototype.moveLeft = function() {
-	this.x -= 25;
+Block.prototype.move = function(direction, board) {
+		
+	var proposedX = this.x;
+	var proposedY = this.y;
+
+	if (direction == 'left'){
+		proposedX -= 25;
+	} else if (direction == 'right') {
+		proposedX += 25;
+	} else if (direction == 'down'){
+		proposedY += 25;
+	} else if (direction == 'up'){
+		proposedY -= 25;
+	}
+
+	if (board.borderDetect(proposedX, proposedY)){
+		this.x = proposedX;
+		this.y = proposedY;
+
+		return true;
+
+	} else {
+
+		return false;
+	}
+
 };
 
-Block.prototype.moveRight = function() {
-	this.x += 25;
-};
+// Board.prototype.borderDetect = function(x,y) {
 
-Block.prototype.moveDown = function() {
-	this.y +=25;
-};
+// 	if (x < 0 || x > this.canvas.width){
+// 		return false;
+// 	} 
+
+// 	if (y > this.canvas.height){
+// 		return false;
+// 	}
+// 	return true;
+// };
+
 

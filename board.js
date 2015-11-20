@@ -1,6 +1,4 @@
-$(document).ready()
-	var pause = true;
-var Board = function (tetromino) {
+var Board = function () {
 	this.canvas = document.getElementById('gameBoard');
 	this.canvas.width = 250;
 	this.canvas.height = 500;
@@ -11,21 +9,9 @@ Board.prototype.addNewTetromino = function() {
 	this.first = new Tetromino(types[0]);
 	this.first.draw(this.ctx);
 };
-Board.prototype.lowerFirst = function() {
-	this.first.dropPiece();
-	this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
-	this.first.draw(this.ctx);
-};
 
-Board.prototype.moveFirstLeft = function() {
-	this.first.movePieceLeft();
-	this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
-	this.first.draw(this.ctx);
-};
-
-Board.prototype.moveFirstRight = function() {
-
-	this.first.movePieceRight();
+Board.prototype.draw = function() {
+	
 	this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
 	this.first.draw(this.ctx);	
 };
@@ -34,6 +20,21 @@ Board.prototype.moveFirstRight = function() {
 Board.prototype.updateBoard = function() {
 
 	window.setInterval(this.lowerFirst.bind(this), 900);
+};
+
+
+
+
+Board.prototype.borderDetect = function(x,y) {
+
+	if (x < 0 || x >= this.canvas.width){
+		return false;
+	} 
+
+	if (y >= this.canvas.height){
+		return false;
+	}
+	return true;
 };
 
 Board.prototype.resetBoard = function() {	

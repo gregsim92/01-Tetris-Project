@@ -20,13 +20,16 @@
 
 						switch(e.which){
 						case 37: //left
-							gameBoard.moveFirstLeft();
+							gameBoard.first.move('left', gameBoard);
+							gameBoard.draw();
 							break;
 						case 39: //right
-							gameBoard.moveFirstRight();
+							gameBoard.first.move('right',gameBoard);
+							gameBoard.draw();
 							break;
 						case 40: //down
-							gameBoard.lowerFirst();
+							gameBoard.first.move('down', gameBoard);
+							gameBoard.draw();
 							break;
 						case 38: //fall down
 							console.log('bottom');
