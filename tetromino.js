@@ -72,60 +72,24 @@ Tetromino.prototype.dropPiece = function() {
 	}
 };
 
-Tetromino.prototype.movePieceRight = function() {
+Tetromino.prototype.canMove = function(direction) {
+	var noCollisionsDetected = true;
 
 	for (var j = 0; j < this.blocks.length; j++){
-		this.blocks[j].moveRight();
-		}
-};
-
-Tetromino.prototype.boundaryLeft = function() {
-	var outLeft = false;
-	if (this.x < 0){
-		console.log('Out of Bounds Left!');
-		return true;
+		var currentBlock = this.blocks[j];
+		noCollisionsDetected = noCollisionsDetected && currentBlock.canMove(direction);
 	}
+
+	return noCollisionsDetected;
 };
-
-Tetromino.prototype.boundaryRight = function() {
-	var outRight = false;
-	if (this.x > 250){
-		console.log('Out of Bounds Right!');
-		return true;
-	}
-};
-
-Tetromino.prototype.boundaryFloor = function() {
-	var outBottom = false;
-	if (this.y > 500){
-		console.log('Fell through the floor!');
-		return true;
-	} else {
-		console.log('play area');
-	}
-};
-
-Tetromino.prototype.Boundaries = function() {
-	this.first.boundaryFloor();
-	this.first.boundaryLeft();
-	this.first.boundaryRight();
-};
-
-Tetromino.prototype.checkBoundary = function() {
-
-	console.log(this);
-	window.setInterval(this.Boundaries, 900);
-};
-
-
-
-
-
 
 
 Tetromino.prototype.move = function(direction, board) {
 	console.log('move');
-
+	
+	if(!this.canMove(direction)){
+		return;
+	}
 	if (direction == 'left'){
 		
 		for (var j = 0; j < this.blocks.length; j++){
@@ -180,9 +144,19 @@ Block.prototype.draw = function(context) {
 };
 
 Block.prototype.move = function(direction, board) {
-		
+
+	var proposedMove = this.proposedMove(direction);
+
+			this.x = proposedMove.x;
+			this.y = proposedMove.y;
+
+};
+
+Block.prototype.proposedMove = function(direction) {
+			
 	var proposedX = this.x;
 	var proposedY = this.y;
+
 
 	if (direction == 'left'){
 		proposedX -= 25;
@@ -194,26 +168,25 @@ Block.prototype.move = function(direction, board) {
 		proposedY -= 25;
 	}
 
-	if (board.borderDetect(proposedX, proposedY)){
-		this.x = proposedX;
-		this.y = proposedY;
+	return {x: proposedX,
+			y: proposedY};
+};
 
-		return true;
+Block.prototype.canMove = function(direction) {
 
-	} else {
+	var proposedMove = this.proposedMove(direction);
 
-		return false;
-	}
+	return gameBoard.borderDetect(proposedMove.x, proposedMove.y);
 
 };
 
 // Board.prototype.borderDetect = function(x,y) {
 
-// 	if (x < 0 || x > this.canvas.width){
+// 	if (x < 0 || x >= this.canvas.width){
 // 		return false;
 // 	} 
 
-// 	if (y > this.canvas.height){
+// 	if (y >= this.canvas.height){
 // 		return false;
 // 	}
 // 	return true;
