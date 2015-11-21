@@ -1,49 +1,30 @@
-// var canvas = document.getElementById('gameBoard');
-					// var ctx = canvas.getContext('2d');
-
-// 					var currentBlock;
-
-// 					function mainEvent(){
-// 						//check to see if there is a current block
-// 							// if not, make one
-// 							//else, move the current block down
-
-// 					}
 
 
-// 					// var first = new Tetromino(types[0]);
 
-// 					// first.draw(ctx);
+$('body').on('keydown', function(e){
 
-// 					//moving a square
-					$('body').on('keydown', function(e){
+	switch(e.which){
+	case 37: //left
+		gameBoard.currentBlock.move('left', gameBoard);
+		gameBoard.draw();
+		break;
+	case 39: //right
+		gameBoard.currentBlock.move('right',gameBoard);
+		gameBoard.draw();
+		break;
+	case 40: //down
+		gameBoard.currentBlock.move('down', gameBoard);
+		gameBoard.draw();
+		break;
+	case 32:
+		console.log('rotate piece');
+		break;	
+	case 13:
+		console.log('play/pause');
+		gameBoard.startNewGame();
+		
+	default: return;
+	}
+	e.preventDefault();
 
-						switch(e.which){
-						case 37: //left
-							gameBoard.first.move('left', gameBoard);
-							gameBoard.draw();
-							break;
-						case 39: //right
-							gameBoard.first.move('right',gameBoard);
-							gameBoard.draw();
-							break;
-						case 40: //down
-							gameBoard.first.move('down', gameBoard);
-							gameBoard.draw();
-							break;
-						case 38: //fall down
-							console.log('bottom');
-							//set floor first!!!
-							break;
-						case 32:
-							console.log('rotate piece');
-							break;	
-						case 13:
-							console.log('play/pause');
-							gameBoard.startNewGame();
-							
-						default: return;
-						}
-						e.preventDefault();
-
-					});
+});
