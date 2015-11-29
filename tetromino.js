@@ -4,6 +4,7 @@ var types = ["square", "line", "J", "L", "T", "S", "Z"];
 var Tetromino = function (shape){
 	this.blocks = [];
 	this.shape = shape;
+	this.position = 0;
 
 	// making a square
 	switch (shape){
@@ -44,7 +45,7 @@ var Tetromino = function (shape){
 		this.blocks.push(new Block(125,-25, 'green'));
 		break;
 	case "Z":
-		this.blocks.push(new Block(100,-75, 'red'));
+		this.blocks.push(new Block(125,-75, 'red'));
 		this.blocks.push(new Block(125,-50, 'red'));
 		this.blocks.push(new Block(100,-50, 'red'));
 		this.blocks.push(new Block(100,-25, 'red'));
@@ -112,6 +113,44 @@ Tetromino.prototype.move = function(direction, board) {
 
 		}
 	}
+
+};
+
+Tetromino.prototype.clonePiece = function() {
+	this
+};
+
+Tetromino.prototype.rotateTetromino = function() {
+
+	if (this.shape === "square"){
+		console.log('square');
+	} else if (this.shape === "line") {
+
+		if (this.position === 0){
+			this.position += 1;
+			this.blocks[0].x -= 25;
+			this.blocks[0].y -= 25;
+			this.blocks[1].x === this.blocks[1].x;
+			this.blocks[1].y === this.blocks[1].y;
+			this.blocks[2].x += 25;
+			this.blocks[2].y += 25;
+			this.blocks[3].x += 50;
+			this.blocks[3].y += 50;
+			console.log('flip');
+		} else if (this.position){
+			this.position -= 1;
+			this.blocks[0].x += 25;
+			this.blocks[0].y += 25;
+			this.blocks[1].x === this.blocks[1].x;
+			this.blocks[1].y === this.blocks[1].y;
+			this.blocks[2].x -= 25;
+			this.blocks[2].y -= 25;
+			this.blocks[3].x -= 50;
+			this.blocks[3].y -= 50;		
+			console.log('revert');
+		}
+	}
+				
 
 };
 

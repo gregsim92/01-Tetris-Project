@@ -18,6 +18,8 @@ $('body').on('keydown', function(e){
 		break;
 	case 32:
 		console.log('rotate piece');
+		gameBoard.currentBlock.rotateTetromino();
+		gameBoard.draw();
 		break;	
 	case 13:
 		console.log('play/pause');
