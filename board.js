@@ -7,11 +7,8 @@ var Board = function () {
 	this.frozenEntities = [];
 }
 
-Board.prototype.activeGame = function(first_argument) {
-	// body...
-};
-
 Board.prototype.addNewTetromino = function() {
+
 	this.currentBlock = new Tetromino(types[Math.floor(types.length * Math.random())]);
 	this.entities.push(this.currentBlock);
 	this.currentBlock.draw(this.ctx);
@@ -29,20 +26,26 @@ Board.prototype.draw = function() {
 };
 
 
-Board.prototype.boardScroll = function() {
-	
-	this.currentBlock.move('down', gameBoard);
-	this.draw();
+Board.prototype.boardScroll = function() {	
 
 	if (!this.currentBlock.canMove('down')){
+
 		this.frozenEntities.push(this.currentBlock);
 		this.addNewTetromino();
 	}
+	
+	this.currentBlock.move('down', gameBoard);
+	this.draw();
 };
 
 Board.prototype.updateBoard = function() {
 	//set a clear interval
+
+
 	window.setInterval(this.boardScroll.bind(this), 900);
+	
+
+
 };
 
 
@@ -53,7 +56,7 @@ Board.prototype.collisionDetect = function(x,y) {
 	for(var c = 0; c < this.frozenEntities.length; c++){
 
 		if(this.frozenEntities[c].collidesWith(x,y)){
-			console.log(this.frozenEntities[c]);
+
 			return false;
 		}
 	}
@@ -69,9 +72,10 @@ Board.prototype.collisionDetect = function(x,y) {
 };
 
 Board.prototype.resetBoard = function() {	
-	
-	//still needs to reset piece position
-	
+	//resets the board to a base state
+
+	this.entities = [];
+	this.frozenEntities = [];
 	this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
 	console.log('board reset');
 };

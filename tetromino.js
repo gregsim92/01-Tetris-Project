@@ -4,6 +4,7 @@ var types = ["square", "line", "J", "L", "T", "S", "Z"];
 var Tetromino = function (shape){
 	this.blocks = [];
 	this.shape = shape;
+	this.position = 0;
 
 	// making a square
 	switch (shape){
@@ -44,7 +45,7 @@ var Tetromino = function (shape){
 		this.blocks.push(new Block(125,-25, 'green'));
 		break;
 	case "Z":
-		this.blocks.push(new Block(100,-75, 'red'));
+		this.blocks.push(new Block(125,-75, 'red'));
 		this.blocks.push(new Block(125,-50, 'red'));
 		this.blocks.push(new Block(100,-50, 'red'));
 		this.blocks.push(new Block(100,-25, 'red'));
@@ -113,6 +114,164 @@ Tetromino.prototype.move = function(direction, board) {
 		}
 	}
 
+};
+
+Tetromino.prototype.rotateTetromino = function() {
+
+	if (this.shape === "line") {
+
+		if (this.position === 0){
+			
+			this.position += 1;
+			this.blocks[0].x -= 25;
+			this.blocks[0].y -= 25;
+			this.blocks[2].x += 25;
+			this.blocks[2].y += 25;
+			this.blocks[3].x += 50;
+			this.blocks[3].y += 50;
+			
+		} else if (this.position === 1){
+			
+			this.position -= 1;
+			this.blocks[0].x += 25;
+			this.blocks[0].y += 25;
+			this.blocks[2].x -= 25;
+			this.blocks[2].y -= 25;
+			this.blocks[3].x -= 50;
+			this.blocks[3].y -= 50;		
+
+		}
+	} else if (this.shape === "J"){
+		if (this.position === 0){
+			this.position += 1;
+			this.blocks[0].x += 50;
+			this.blocks[1].x += 25;
+			this.blocks[1].y += 25;
+			this.blocks[3].x -= 25;
+			this.blocks[3].y -= 25;
+		} else if (this.position === 1){
+			this.position += 1;
+			this.blocks[0].y += 50;
+			this.blocks[1].x -= 25; 
+			this.blocks[1].y += 25;
+			this.blocks[3].x += 25; 
+			this.blocks[3].y -= 25;
+		} else if (this.position === 2){
+			this.position += 1;
+			this.blocks[0].x -= 50;
+			this.blocks[1].x -= 25;
+			this.blocks[1].y -= 25;
+			this.blocks[3].x += 25;
+			this.blocks[3].y += 25;
+		} else if (this.position === 3){
+			this.position = 0;
+			this.blocks[0].y -= 50;
+			this.blocks[1].x += 25;
+			this.blocks[1].y -= 25;
+			this.blocks[3].x -= 25;
+			this.blocks[3].y += 25;
+
+		}
+	} else if (this.shape === "L"){
+		if (this.position === 0){
+			this.position += 1;
+			this.blocks[0].x += 25;
+			this.blocks[0].y += 25;
+			this.blocks[1].y += 50;
+			this.blocks[3].x -= 25;
+			this.blocks[3].y -= 25;
+		} else if (this.position === 1){
+			this.position += 1;
+			this.blocks[0].x -= 25; 
+			this.blocks[0].y += 25;
+			this.blocks[1].x -= 50;
+			this.blocks[3].x += 25; 
+			this.blocks[3].y -= 25;
+		} else if (this.position === 2){
+			this.position += 1;
+			this.blocks[0].x -= 25;
+			this.blocks[0].y -= 25;
+			this.blocks[1].y -= 50;
+			this.blocks[3].x += 25;
+			this.blocks[3].y += 25;
+		} else if (this.position === 3){
+			this.position = 0;
+			this.blocks[0].x += 25;
+			this.blocks[0].y -= 25;
+			this.blocks[1].x += 50;
+			this.blocks[3].x -= 25;
+			this.blocks[3].y += 25;
+		}
+	} else if (this.shape === "T"){
+		if (this.position === 0){
+			this.position += 1;
+			this.blocks[0].x += 25;
+			this.blocks[0].y += 25;
+			this.blocks[2].x -= 25;
+			this.blocks[2].y += 25;
+			this.blocks[3].x -= 25;
+			this.blocks[3].y -= 25;
+		} else if (this.position === 1){
+			this.position += 1;
+			this.blocks[0].x -= 25;
+			this.blocks[0].y += 25;
+			this.blocks[2].x -= 25;
+			this.blocks[2].y -= 25;
+			this.blocks[3].x += 25;
+			this.blocks[3].y -= 25;
+		} else if (this.position === 2){
+			this.position += 1;
+			this.blocks[0].x -= 25;
+			this.blocks[0].y -= 25;
+			this.blocks[2].x += 25;
+			this.blocks[2].y -= 25;
+			this.blocks[3].x += 25;
+			this.blocks[3].y += 25; 
+		} else if (this.position === 3){
+			this.position = 0;
+			this.blocks[0].x += 25;
+			this.blocks[0].y -= 25;
+			this.blocks[2].x += 25;
+			this.blocks[2].y += 25;
+			this.blocks[3].x -= 25;
+			this.blocks[3].y += 25; 
+		} 
+	} else if (this.shape === "S"){
+		if (this.position === 0){
+			
+			this.position += 1;
+			this.blocks[0].x += 25; 
+			this.blocks[0].y += 25;
+			this.blocks[2].x -= 25;
+			this.blocks[2].y += 25;
+			this.blocks[3].x -= 50;
+
+		} else if (this.position === 1){
+			this.position = 0;
+			this.blocks[0].x -= 25; 
+			this.blocks[0].y -= 25;
+			this.blocks[2].x += 25;
+			this.blocks[2].y -= 25;
+			this.blocks[3].x += 50;
+		}
+	} else if (this.shape === "Z"){
+		if (this.position === 0){
+			
+			this.position += 1;
+			this.blocks[0].x -= 25; 
+			this.blocks[0].y += 25;
+			this.blocks[2].x += 25;
+			this.blocks[2].y += 25;
+			this.blocks[3].x += 50;
+		} else if (this.position === 1){
+			this.position = 0;
+			this.blocks[0].x += 25; 
+			this.blocks[0].y -= 25;
+			this.blocks[2].x -= 25;
+			this.blocks[2].y -= 25;
+			this.blocks[3].x -= 50;			
+		}
+	}
 };
 
 var Block = function (x, y, color){
