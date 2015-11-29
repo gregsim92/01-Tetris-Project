@@ -61,105 +61,58 @@ Tetromino.prototype.draw = function(context) {
 
 };
 
-Tetromino.prototype.addBlock = function() {
-	
-};
-
-Tetromino.prototype.dropPiece = function() {
-	
+Tetromino.prototype.collidesWith = function(x, y) {
 	for (var j = 0; j < this.blocks.length; j++){
-		this.blocks[j].moveDown();
+		var currentMyBlock = this.blocks[j];
+			
+			if (currentMyBlock.collidesWith(x,y)){
+				return true;
+			}
 	}
+	return false;
 };
 
-Tetromino.prototype.movePieceRight = function() {
+
+Tetromino.prototype.canMove = function(direction) {
+	var noCollisionsDetected = true;
 
 	for (var j = 0; j < this.blocks.length; j++){
-		this.blocks[j].moveRight();
-		}
-};
-
-Tetromino.prototype.boundaryLeft = function() {
-	var outLeft = false;
-	if (this.x < 0){
-		console.log('Out of Bounds Left!');
-		return true;
+		var currentBlock = this.blocks[j];
+		noCollisionsDetected = noCollisionsDetected && currentBlock.canMove(direction);
 	}
+
+	return noCollisionsDetected;
 };
-
-Tetromino.prototype.boundaryRight = function() {
-	var outRight = false;
-	if (this.x > 250){
-		console.log('Out of Bounds Right!');
-		return true;
-	}
-};
-
-Tetromino.prototype.boundaryFloor = function() {
-	var outBottom = false;
-	if (this.y > 500){
-		console.log('Fell through the floor!');
-		return true;
-	} else {
-		console.log('play area');
-	}
-};
-
-Tetromino.prototype.Boundaries = function() {
-	this.first.boundaryFloor();
-	this.first.boundaryLeft();
-	this.first.boundaryRight();
-};
-
-Tetromino.prototype.checkBoundary = function() {
-
-	console.log(this);
-	window.setInterval(this.Boundaries, 900);
-};
-
-
-
-
-
 
 
 Tetromino.prototype.move = function(direction, board) {
-	console.log('move');
-
+	
+	if(!this.canMove(direction)){
+		return;
+	}
 	if (direction == 'left'){
 		
 		for (var j = 0; j < this.blocks.length; j++){
-			var didMoveLeft = this.blocks[j].move('left', board);
-
-			// if (!didMoveLeft) {
-			// 	for (var i = j; i>0; i--){
-			// 		this.blocks[j].move('right',board);
-			// 	}
-			// }
+			
+			this.blocks[j].move('left', board);
+		
 		}
 	} else if  (direction == 'right'){
 			
 		for (var j = 0; j < this.blocks.length; j++){
-			var didMoveRight = this.blocks[j].move('right', board);
-			// if (!this.blocks[j].move('right', board)){
-			// 	for (var i = j; i>0; i--){
-			// 		this.blocks[i].move('left',board);
-			// 	}
-			// }
+			
+			this.blocks[j].move('right', board);
+
 		}
 	} else if (direction =='down'){
 	
 		for (var j = 0; j < this.blocks.length; j++){
-			var didMoveDown = this.blocks[j].move('down', board);
+			
+			this.blocks[j].move('down', board);
 
-			// if (!this.blocks[j].move('down', board)){
-			// 	for (var i = j; i>0; i--){
-			// 		this.blocks[i].move('up',board);
-			// 	}
-			// }
 		}
 	}
-					console.log('break');
+
 };
 
 var Block = function (x, y, color){
@@ -167,6 +120,7 @@ var Block = function (x, y, color){
 	this.y = y;
 	this.color = color;
 }
+
 Block.prototype.draw = function(context) {
 
 
@@ -180,9 +134,19 @@ Block.prototype.draw = function(context) {
 };
 
 Block.prototype.move = function(direction, board) {
-		
+
+	var proposedMove = this.proposedMove(direction);
+
+			this.x = proposedMove.x;
+			this.y = proposedMove.y; 
+
+};
+
+Block.prototype.proposedMove = function(direction) {
+			
 	var proposedX = this.x;
 	var proposedY = this.y;
+
 
 	if (direction == 'left'){
 		proposedX -= 25;
@@ -194,29 +158,21 @@ Block.prototype.move = function(direction, board) {
 		proposedY -= 25;
 	}
 
-	if (board.borderDetect(proposedX, proposedY)){
-		this.x = proposedX;
-		this.y = proposedY;
+	return {x: proposedX,
+			y: proposedY};
+};
 
-		return true;
+Block.prototype.canMove = function(direction) {
 
-	} else {
+	var proposedMove = this.proposedMove(direction);
 
-		return false;
-	}
+	return gameBoard.collisionDetect(proposedMove.x, proposedMove.y);
 
 };
 
-// Board.prototype.borderDetect = function(x,y) {
-
-// 	if (x < 0 || x > this.canvas.width){
-// 		return false;
-// 	} 
-
-// 	if (y > this.canvas.height){
-// 		return false;
-// 	}
-// 	return true;
-// };
+Block.prototype.collidesWith = function(x,y) {
+	
+	return (this.x === x && this.y === y);
+};
 
 
