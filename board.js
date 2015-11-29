@@ -26,16 +26,16 @@ Board.prototype.draw = function() {
 };
 
 
-Board.prototype.boardScroll = function() {
-	
-	this.currentBlock.move('down', gameBoard);
-	this.draw();
+Board.prototype.boardScroll = function() {	
 
 	if (!this.currentBlock.canMove('down')){
 
 		this.frozenEntities.push(this.currentBlock);
 		this.addNewTetromino();
 	}
+	
+	this.currentBlock.move('down', gameBoard);
+	this.draw();
 };
 
 Board.prototype.updateBoard = function() {
