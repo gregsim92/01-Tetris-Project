@@ -124,7 +124,7 @@ Board.prototype.checkCeiling = function(x) {
 				blockCount += 1;
 			}
 
-			if (blockCount >= 25){
+			if (blockCount >= 20){
 				console.log('game over');
 				return true;
 			}
