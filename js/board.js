@@ -13,6 +13,7 @@ var Board = function () {
 Board.prototype.addNewTetromino = function() {
 
 	this.currentBlock = new Tetromino(types[Math.floor(types.length * Math.random())]);
+	this.currentBlock.blocks.sort(sortSecond);
 	this.entities.push(this.currentBlock);
 	this.currentBlock.draw(this.ctx);
 };
@@ -37,6 +38,7 @@ Board.prototype.boardScroll = function() {
 
 
 		this.frozenEntities.push(this.currentBlock);
+		this.frozenEntities.sort(sortSecond);
 		this.addNewTetromino();
 		this.points += 10;
 
@@ -60,9 +62,8 @@ Board.prototype.boardScroll = function() {
 
 Board.prototype.setBlocksDown = function() {
 
-	for (var i = 0; i < this.frozenEntities.length; i++){
-		for (var j = 0; j < this.frozenEntities[i].blocks.length; j++){
-
+	for (var i = this.frozenEntities.length - 1; i >= 0  ; i--){
+		for (var j = this.frozenEntities[i].blocks.length - 1; j >= 0 ; j--){
 
 			if (this.frozenEntities[i].blocks[j].canMove('down')){
 				this.frozenEntities[i].blocks[j].move('down');
@@ -169,6 +170,7 @@ Board.prototype.deleteRow = function(y) {
 Board.prototype.resetBoard = function() {	
 	//resets the board to a base state
 
+	clearInterval(this.startScroll)
 	this.entities = [];
 	this.frozenEntities = [];
 	this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
@@ -182,6 +184,8 @@ Board.prototype.startNewGame = function() {
 	this.addNewTetromino();
 	this.updateBoard();
 };
+
+
 
 
 var filter = function(array, callbackFunction) {
@@ -198,6 +202,20 @@ var filter = function(array, callbackFunction) {
 	}
 	return newArr;
 };
+
+var sortSecond = function(a,b){
+
+	if(a[1]===b[1]){
+		return 0;
+	} else {
+		return (a[1] < b[1]) ? -1 : 1;
+	}
+}
+
+
+
+
+
 
 
 
