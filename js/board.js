@@ -61,11 +61,11 @@ Board.prototype.boardScroll = function() {
 Board.prototype.setBlocksDown = function() {
 
 	for (var i = 0; i < this.frozenEntities.length; i++){
-		// for (var j = 0; j < this.frozenEntities[i].blocks.length; j++){
+		for (var j = 0; j < this.frozenEntities[i].blocks.length; j++){
 
 
-			if (this.frozenEntities[i].canMove('down')){
-				this.frozenEntities[i].move('down');
+			if (this.frozenEntities[i].blocks[j].canMove('down')){
+				this.frozenEntities[i].blocks[j].move('down');
 			}
 
 		}
