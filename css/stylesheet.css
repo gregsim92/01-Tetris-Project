@@ -37,7 +37,17 @@ body {
 }
 
 .displayNextPiece {
-	margin-bottom: 350px;
+	margin-bottom: 50px;
+}
+
+table {
+	width: 400px;
+	margin-bottom: 300px;
+	margin-left: 50px;
+}
+
+table td {
+	margin: 5px;
 }
 
 /*#screenshot {

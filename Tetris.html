@@ -13,9 +13,9 @@
 				<canvas  id='gameBoard'>
 					Error: Canvas not supported by your browser
 				</canvas>
-				<script type="text/javascript" src="tetromino.js"></script>
-				<script type="text/javascript" src="board.js"></script>
-				<script type="text/javascript" src="main.js"></script>
+				<script type="text/javascript" src="js/tetromino.js"></script>
+				<script type="text/javascript" src="js/board.js"></script>
+				<script type="text/javascript" src="js/main.js"></script>
 				<script>
 					var gameBoard = new Board();
 						
@@ -28,7 +28,21 @@
 				<div class='displayNextPiece'>
 					<img src="http://lorempixel.com/250/100" alt="next Piece placeholder" class='image-responsive center-block'>
 				</div>
-				<div>0</div>
+				<div class = 'controls'>
+					<table>
+						<tr>
+							<td>Enter - Start New Game</td>
+						</tr>
+						<tr>
+							<td>Arrow Keys - Move Block</td>
+						</tr>
+						<tr>
+							<td>Space - Rotate Block</td>
+						</tr>
+					</table>
+				</div>
+				<div id = 'Points'></div>
+				<div id = 'lines'></div>
 			</div>
 		</div>
 	</div>
