@@ -12,7 +12,7 @@ var Board = function () {
 
 Board.prototype.addNewTetromino = function() {
 
-	this.currentBlock = new Tetromino(types[1]);
+	this.currentBlock = new Tetromino(types[Math.floor(types.length * Math.random())]);
 	this.entities.push(this.currentBlock);
 	this.currentBlock.draw(this.ctx);
 };
