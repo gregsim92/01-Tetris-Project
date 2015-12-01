@@ -313,8 +313,6 @@ Block.prototype.proposedMove = function(direction) {
 		proposedX += 25;
 	} else if (direction == 'down'){
 		proposedY += 25;
-	} else if (direction == 'up'){
-		proposedY -= 25;
 	}
 
 	return {x: proposedX,
