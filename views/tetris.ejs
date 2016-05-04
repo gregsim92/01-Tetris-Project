@@ -1,0 +1,50 @@
+<html>
+<head>
+	<title>Play On!</title>	
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+	<div class ='container' id = 'mainContainer'>
+		<div class='col-md-6 vcenter'>
+			<div class='col-md-6 col-md-offset-4'>
+				<canvas  id='gameBoard'>
+					Error: Canvas not supported by your browser
+				</canvas>
+				<script type="text/javascript" src="javascripts/tetromino.js"></script>
+				<script type="text/javascript" src="javascripts/board.js"></script>
+				<script type="text/javascript" src="javascripts/main.js"></script>
+				<script>
+					var gameBoard = new Board();
+						
+				</script>
+			</div>
+		</div>
+		
+		<div class='col-md-4 vcenter'>
+			<div class ='centered'>
+				<div class='displayNextPiece'>
+					<img src="http://lorempixel.com/250/100" alt="next Piece placeholder" class='image-responsive center-block'>
+				</div>
+				<div class = 'controls'>
+					<table>
+						<tr>
+							<td>Enter - Start New Game</td>
+						</tr>
+						<tr>
+							<td>Arrow Keys - Move Block</td>
+						</tr>
+						<tr>
+							<td>Space - Rotate Block</td>
+						</tr>
+					</table>
+				</div>
+				<div id = 'Points'></div>
+				<div id = 'lines'></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

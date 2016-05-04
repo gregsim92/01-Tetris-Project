@@ -16,7 +16,7 @@ Board.prototype.addNewTetromino = function() {
 	this.currentBlock.blocks.sort(sortSecond);
 	this.entities.push(this.currentBlock);
 	this.currentBlock.draw(this.ctx);
-};
+};2
 
 
 
